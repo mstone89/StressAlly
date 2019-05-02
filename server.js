@@ -4,8 +4,8 @@
 
 const express = require('express');
 const methodOverride  = require('method-override');
-const mongoose = require ('mongoose');
-const app = express ();
+const mongoose = require('mongoose');
+const app = express();
 const db = mongoose.connection;
 
 //___________________
@@ -14,6 +14,12 @@ const db = mongoose.connection;
 
 // Allow use of Heroku's port or your own local port, depending on the environment
 const PORT = process.env.PORT || 3000;
+
+//___________________
+//Controllers
+//___________________
+
+const allyController = require('./controllers/ally.js');
 
 //___________________
 //Database
@@ -48,6 +54,7 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
+app.use('/ally', allyController);
 
 //___________________
 // Routes
