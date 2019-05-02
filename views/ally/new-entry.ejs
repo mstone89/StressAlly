@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- ADD IMAGE HERE -->
+            <h1>New Entry</h1>
+            <form class="" action="/ally" method="POST">
+                <fieldset>
+                    <legend>How Are You Feeling?</legend>
+                    <label>Anxiety Rating:</label>
+                    <input type="number" name="rating" value="1" min="1" max="5"/>
+                    <label>Foods You've Eaten Recently:</label>
+                    <input type="text" name="food"/>
+                    <label>Hours Of Sleep:</label>
+                    <input type="number" name="sleep" value="0" min="0"/>
+                    <label>Meditated?</label>
+                    <input type="checkbox" name="meditate"/>
+                    <label>Exercised?</label>
+                    <input type="checkbox" name="exercise"/>
+                    <label>Date:</label>
+                    <input type="date" name="date"/>
+                    <label>Comments:</label>
+                    <textarea name="comments"></textarea>
+                </fieldset>
+                <input type="submit" value="Submit Entry">
+            </form>
+        </div>
+    </body>
+</html>
