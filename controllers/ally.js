@@ -10,4 +10,8 @@ ally.get('/new-entry', (req, res) => {
     res.send('route working');
 });
 
+ally.get('/entries', (req, res) => {
+    res.send('route working');
+});
+
 module.exports = ally;
