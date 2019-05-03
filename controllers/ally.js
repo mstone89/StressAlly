@@ -42,7 +42,12 @@ ally.get('/new-entry', (req, res) => {
 
 // SHOW ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
-    res.send('route working');
+    Entry.find({}, (error, allEntries) => {
+        // console.log(allEntries);
+        res.render('ally/entries.ejs', {
+            entries: allEntries
+        });
+    });
 });
 
 module.exports = ally;
