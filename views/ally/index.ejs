@@ -9,13 +9,22 @@
             <!-- ADD IMAGE HERE -->
             <div class="goal">
                 <h1>I want to:</h1>
-                <!-- EJS CONDITIONALS -->
-                <form class="">
-                    <button type="submit" name="completed">Goal Completed</button>
-                </form>
-                <form class="">
-                    <button type="submit" name="new-goal">New Goal</button>
-                </form>
+                <% if (goals.length === 0) { %>
+                    <h2>set a new goal!</h2>
+                    <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
+                <% } else { %>
+                    <% for (let i = 0; i < goals.length; i++) { %>
+                        <% if (goal[i].completed === false) { %>
+                            <h2><%=goal[i].description%></h2>
+                            <form class="">
+                                <button type="submit" name="completed">Goal Completed</button>
+                            </form>
+                        <% } else { %>
+                            <h2>set a new goal!</h2>
+                            <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
+                        <% } %>
+                    <% } %>
+                <% } %>
             </div>
             <div class="activity">
                 <h1>My next activity:</h1>

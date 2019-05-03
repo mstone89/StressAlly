@@ -1,6 +1,8 @@
 const express = require('express');
 const ally = express.Router();
 const Entry = require('../models/entries.js');
+const Activity = require('../models/activities.js');
+const Goal = require('../models/goals.js');
 
 /****************
 PUT
@@ -54,7 +56,11 @@ GET
 
 // INDEX ROUTE
 ally.get('/', (req, res) => {
-    res.render('ally/index.ejs');
+    Goal.find({}, (error, allGoals) => {
+        res.render('ally/index.ejs', {
+            goals: allGoals
+        });
+    })
 });
 
 // NEW ENTRY ROUTE
@@ -79,6 +85,11 @@ ally.get('/:id/edit', (req, res) => {
             entry: foundEntry
         });
     });
+});
+
+// NEW GOAL ROUTE
+ally.get('/new-goal', (req, res) => {
+    res.render('ally/new-goal.ejs');
 });
 
 module.exports = ally;

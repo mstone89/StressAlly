@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const goalSchema = new mongoose.Schema({
-    current: String,
-    completed: Array
+    description: String,
+    completed: Boolean
 });
 
-const Goal = mongoose.model('Goal', activitySchema);
+const Goal = mongoose.model('Goal', goalSchema);
 
 module.exports = Goal;

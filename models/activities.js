@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const activitySchema = new mongoose.Schema({
-    current: String,
-    all: Array
+    name: String,
 });
 
 const Activity = mongoose.model('Activity', activitySchema);
