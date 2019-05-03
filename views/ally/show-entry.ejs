@@ -44,10 +44,14 @@
                 <% if (entry.comments === null || entry.comments === '') { %>
                     None
                 <% } else { %>
-                    <%=entry.foods%>
+                    <%=entry.comments%>
                 <% } %>
             </dd>
         </dl>
+        <a href="/ally/<%=entry.id%>/edit"><button>Edit Entry</button></a>
+        <form action="/ally/<%=entry.id%>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete Entry"/>
+        </form>
         <a href="/ally/entries"><button type="button" name="back">Back To Entries</button></a>
     </body>
 </html>
