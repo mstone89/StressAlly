@@ -6,35 +6,48 @@
     </head>
     <body>
         <div class="container">
-            <h1>Edit Entry</h1>
+            <h1>Your Entry</h1>
         </div>
-        <div class="container">
-            <form class="" action="/ally/<%=entry.id%>?_method=PUT" method="POST">
-                <fieldset>
-                    <legend>How Are You Feeling?</legend>
-                    <label>Anxiety Rating:</label>
-                    <input type="number" name="rating" value="<%=entry.rating%>" min="1" max="5"/>
-                    <label>Foods You've Eaten Recently:</label>
-                    <input type="text" name="food" value="<%=entry.food%>"/>
-                    <label>Hours Of Sleep:</label>
-                    <input type="number" name="sleep" value="<%=entry.sleep%>" min="0"/>
-                    <label>Meditated?</label>
-                    <input type="checkbox" name="meditate"
-                    <% if (entry.meditate === true) { %>
-                        checked
-                    <% } %>
-                    />
-                    <label>Exercised?</label>
-                    <input type="checkbox" name="exercise"
-                    <% if (entry.exercise === true) { %>
-                        checked
-                    <% } %>
-                    />
-                    <label>Comments:</label>
-                    <textarea name="comments" value="<%=entry.comments%>"></textarea>
-                </fieldset>
-                <input type="submit" value="Submit Changes">
-            </form>
-        </div>
+        <dl>
+            <dt>Date:</dt>
+            <dd><%=entry.date%></dd>
+            <dt>Rating:</dt>
+            <dd><%=entry.rating%></dd>
+            <dt>Foods:</dt>
+            <dd>
+                <% if (entry.food.length <= 0 || entry.food[0] === '') { %>
+                    None
+                <% } else { %>
+                    <%=entry.foods%>
+                <% } %>
+            </dd>
+            <dt>Sleep:</dt>
+            <dd><%=entry.sleep%></dd>
+            <dt>Meditated?</dt>
+            <dd>
+                <% if (entry.meditate === true) { %>
+                    Yes
+                <% } else { %>
+                    No
+                <% } %>
+            </dd>
+            <dt>Exercised?</dt>
+            <dd>
+                <% if (entry.exercise === true) { %>
+                    Yes
+                <% } else { %>
+                    No
+                <% } %>
+            </dd>
+            <dt>Comments</dt>
+            <dd>
+                <% if (entry.comments === null || entry.comments === '') { %>
+                    None
+                <% } else { %>
+                    <%=entry.foods%>
+                <% } %>
+            </dd>
+        </dl>
+        <a href="/ally/entries"><button type="button" name="back">Back To Entries</button></a>
     </body>
 </html>

@@ -13,8 +13,10 @@
             <ul>
                 <% for (let i = 0; i < entries.length; i++) { %>
                     <li>
-                        Date: <%=entries[i].date%>
-                        Rating: <%=entries[i].rating%>
+                        <a href="/ally/<%=entries[i].id%>">
+                            Date: <%=entries[i].date%>
+                            Rating: <%=entries[i].rating%>
+                        </a>
                         <a href="/ally/<%=entries[i].id%>/edit"><button>Edit Entry</button></a>
                         <form action="/ally/<%=entries[i].id%>?_method=DELETE" method="POST">
                             <input type="submit" value="Delete Entry"/>

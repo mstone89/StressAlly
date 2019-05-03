@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Edit Entry</h1>
+        </div>
+        <div class="container">
+            <form class="" action="/ally/<%=entry.id%>?_method=PUT" method="POST">
+                <fieldset>
+                    <legend>How Are You Feeling?</legend>
+                    <label>Anxiety Rating:</label>
+                    <input type="number" name="rating" value="<%=entry.rating%>" min="1" max="5"/>
+                    <label>Foods You've Eaten Recently:</label>
+                    <input type="text" name="food" value="<%=entry.food%>"/>
+                    <label>Hours Of Sleep:</label>
+                    <input type="number" name="sleep" value="<%=entry.sleep%>" min="0"/>
+                    <label>Meditated?</label>
+                    <input type="checkbox" name="meditate"
+                    <% if (entry.meditate === true) { %>
+                        checked
+                    <% } %>
+                    />
+                    <label>Exercised?</label>
+                    <input type="checkbox" name="exercise"
+                    <% if (entry.exercise === true) { %>
+                        checked
+                    <% } %>
+                    />
+                    <label>Comments:</label>
+                    <textarea name="comments" value="<%=entry.comments%>"></textarea>
+                </fieldset>
+                <input type="submit" value="Submit Changes">
+            </form>
+        </div>
+    </body>
+</html>

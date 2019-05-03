@@ -25,6 +25,7 @@ PUT
 //     });
 // });
 
+// EDIT SINGLE ENTRY
 ally.put('/:id', (req, res) => {
     if (req.body.meditate === 'on') {
         req.body.meditate = true;
@@ -105,8 +106,17 @@ ally.get('/entries', (req, res) => {
     });
 });
 
-// SHOW SINGLE ENTRY ROUTE
+// EDIT SINGLE ENTRY ROUTE
 ally.get('/:id/edit', (req, res) => {
+    Entry.findById(req.params.id, (error, foundEntry) => {
+        res.render('ally/edit-entry.ejs', {
+            entry: foundEntry
+        });
+    });
+});
+
+// SHOW SINGLE ENTRY
+ally.get('/:id', (req, res) => {
     Entry.findById(req.params.id, (error, foundEntry) => {
         res.render('ally/show-entry.ejs', {
             entry: foundEntry
