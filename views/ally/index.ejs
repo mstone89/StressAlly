@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+        <script type="text/javascript" src="../js/app.js"></script>
     </head>
     <body>
         <div class="container">
@@ -10,17 +12,20 @@
             <div class="goal">
                 <h1>I want to:</h1>
                 <% if (goals.length) { %>
-                    <% for (let i = 0; i < goals.length; i++) { %>
-                        <% if (goals[i].completed === false) { %>
-                            <h2><%=goals[i].description%></h2>
-                            <form action="/ally/<%=goals[i].id%>/complete-goal?_method=PUT" method="POST">
+                    <% for (let i = goals.length; i > goals.length - 1; i--) { %>
+                        <% if (goals[goals.length - 1].completed === false) { %>
+                            <h2><%=goals[goals.length - 1].description%></h2>
+                            <form action="/ally/<%=goals[goals.length - 1].id%>/complete-goal?_method=PUT" method="POST">
                                 <button type="submit" name="completed">Goal Completed</button>
                             </form>
+                        <% } else { %>
+                            <h2>set a new goal</h2>
+                            <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>%>
                         <% } %>
                     <% } %>
                 <% } else { %>
                     <h2>set a new goal</h2>
-                    <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
+                    <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>%>
                 <% } %>
             </div>
             <div class="activity">
