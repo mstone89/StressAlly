@@ -14,8 +14,8 @@
                     <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
                 <% } else { %>
                     <% for (let i = 0; i < goals.length; i++) { %>
-                        <% if (goal[i].completed === false) { %>
-                            <h2><%=goal[i].description%></h2>
+                        <% if (goals[i].completed === false) { %>
+                            <h2><%=goals[i].description%></h2>
                             <form class="">
                                 <button type="submit" name="completed">Goal Completed</button>
                             </form>

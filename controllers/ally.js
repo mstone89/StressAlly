@@ -30,6 +30,16 @@ ally.put('/:id', (req, res) => {
 POST
 ****************/
 
+// CREATE NEW GOAL
+ally.post('/new-goal', (req, res) => {
+    req.body.completed = false;
+    Goal.create(req.body, (error, createdGoal) => {
+        console.log(createdGoal);
+        res.redirect('/ally');
+    });
+});
+
+// CREATE NEW ENTRY
 ally.post('/', (req, res) => {
     if (req.body.meditate === 'on') {
         req.body.meditate = true;
