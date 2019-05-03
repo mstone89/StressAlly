@@ -6,7 +6,7 @@ const entrySchema = new mongoose.Schema({
         min: 1,
         max: 5
     },
-    food: [Array],
+    food: Array,
     sleep: {
         type: Number,
         min: 0,

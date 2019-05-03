@@ -7,7 +7,23 @@ POST
 ****************/
 
 ally.post('/', (req, res) => {
-    res.send('route working');
+    if (req.body.meditate === 'on') {
+        req.body.meditate = true;
+    } else {
+        req.body.meditate = false;
+    }
+    if (req.body.exercise === 'on') {
+        req.body.exercise = true;
+    } else {
+        req.body.exercise = false;
+    }
+    req.body.date = req.body.date.default;
+    req.body.rating = parseInt(req.body.rating);
+    req.body.sleep = parseInt(req.body.sleep);
+    Entry.create(req.body, (error, createdEntry) => {
+        console.log(createdEntry);
+        res.redirect('/ally');
+    });
 });
 
 /****************
