@@ -87,6 +87,15 @@ ally.get('/new-goal', (req, res) => {
     res.render('ally/new-goal.ejs');
 });
 
+// SHOW COMPLETED GOALS
+ally.get('/completed-goals', (req, res) => {
+    Goal.find({}, (error, allGoals) => {
+        res.render('ally/show-goals.ejs', {
+            goals: allGoals
+        });
+    });
+});
+
 // INDEX ROUTE
 ally.get('/', (req, res) => {
     Goal.find({}, (error, allGoals) => {

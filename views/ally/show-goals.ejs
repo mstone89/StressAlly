@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Your Completed Goals</h1>
+        </div>
+        <div class="container">
+            <ul>
+                <% for (let i = 0; i < goals.length; i++) { %>
+                    <% if (goals[i].completed === true) { %>
+                        <li>
+                            Description: <%=goals[i].description%> /
+                            Completed: <%=goals[i].updatedAt%>
+                        </li>
+                    <% } %>
+                <% } %>
+            </ul>
+        </div>
+        <a href="/ally"><button type="button" name="back">Back To Main</button></a>
+    </body>
+</html>
