@@ -18,12 +18,12 @@ ally.delete('/:id', (req, res) => {
 PUT
 ****************/
 
-// ally.put('/:id/complete-goal', (req, res) => {
-//     req.body.completed = true;
-//     Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
-//         res.redirect('/ally');
-//     });
-// });
+ally.put('/:id/complete-goal', (req, res) => {
+    req.body.completed = true;
+    Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
+        res.redirect('/ally');
+    });
+});
 
 // EDIT SINGLE ENTRY
 ally.put('/:id', (req, res) => {
@@ -82,6 +82,11 @@ ally.post('/', (req, res) => {
 GET
 ****************/
 
+// NEW GOAL ROUTE
+ally.get('/new-goal', (req, res) => {
+    res.render('ally/new-goal.ejs');
+});
+
 // INDEX ROUTE
 ally.get('/', (req, res) => {
     Goal.find({}, (error, allGoals) => {
@@ -124,9 +129,5 @@ ally.get('/:id', (req, res) => {
     });
 });
 
-// NEW GOAL ROUTE
-ally.get('/new-goal', (req, res) => {
-    res.render('ally/new-goal.ejs');
-});
 
 module.exports = ally;
