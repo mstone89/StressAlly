@@ -3,6 +3,28 @@ const ally = express.Router();
 const Entry = require('../models/entries.js');
 
 /****************
+PUT
+****************/
+
+ally.put('/:id', (req, res) => {
+    if (req.body.meditate === 'on') {
+        req.body.meditate = true;
+    } else {
+        req.body.meditate = false;
+    }
+    if (req.body.exercise === 'on') {
+        req.body.exercise = true;
+    } else {
+        req.body.exercise = false;
+    }
+    req.body.rating = parseInt(req.body.rating);
+    req.body.sleep = parseInt(req.body.sleep);
+    Entry.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedEntry) => {
+        res.redirect('/ally/entries');
+    });
+});
+
+/****************
 POST
 ****************/
 
@@ -40,12 +62,21 @@ ally.get('/new-entry', (req, res) => {
     res.render('ally/new-entry.ejs');
 });
 
-// SHOW ENTRIES ROUTE
+// SHOW ALL ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
     Entry.find({}, (error, allEntries) => {
         // console.log(allEntries);
         res.render('ally/entries.ejs', {
             entries: allEntries
+        });
+    });
+});
+
+// SHOW SINGLE ENTRY ROUTE
+ally.get('/:id/edit', (req, res) => {
+    Entry.findById(req.params.id, (error, foundEntry) => {
+        res.render('ally/show-entry.ejs', {
+            entry: foundEntry
         });
     });
 });
