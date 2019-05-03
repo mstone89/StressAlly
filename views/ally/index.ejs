@@ -9,18 +9,21 @@
             <!-- ADD IMAGE HERE -->
             <div class="goal">
                 <h1>I want to:</h1>
-                <!-- <% if (goals.length === 0) { %>
-                    <h2>set a new goal</h2>
-                    <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
-                <% } else { %>
+                <!-- <% if (goals.length) { %>
                     <% for (let i = 0; i < goals.length; i++) { %>
                         <% if (goals[i].completed === false) { %>
                             <h2><%=goals[i].description%></h2>
+                            <form action="/ally/<%=goals[i].id%>/complete-goal?_method=PUT" method="POST">
+                                <button type="submit" name="completed">Goal Completed</button>
+                            </form>
+                        <% } else { %>
+                            <h2>set a new goal</h2>
+                            <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
                         <% } %>
-                        <form action="/ally/<%=goals[i].id%>/complete-goal?_method=PUT" method="POST">
-                            <button type="submit" name="completed">Goal Completed</button>
-                        </form>
                     <% } %>
+                <% } else { %>
+                    <h2>set a new goal</h2>
+                    <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>
                 <% } %> -->
             </div>
             <div class="activity">

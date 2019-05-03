@@ -40,7 +40,7 @@ ally.put('/:id', (req, res) => {
     req.body.rating = parseInt(req.body.rating);
     req.body.sleep = parseInt(req.body.sleep);
     Entry.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedEntry) => {
-        res.redirect('/ally/entries');
+        res.redirect('/ally/' + req.params.id);
     });
 });
 
