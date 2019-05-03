@@ -84,7 +84,11 @@ GET
 
 // NEW GOAL ROUTE
 ally.get('/new-goal', (req, res) => {
-    res.render('ally/new-goal.ejs');
+    Goal.find({}, (error, allGoals) => {
+        res.render('ally/new-goal.ejs', {
+            goals: allGoals
+        });
+    });
 });
 
 // SHOW COMPLETED GOALS
