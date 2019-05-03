@@ -5,8 +5,25 @@ const Activity = require('../models/activities.js');
 const Goal = require('../models/goals.js');
 
 /****************
+DELETE
+****************/
+
+ally.delete('/:id', (req, res) => {
+    Entry.findByIdAndRemove(req.params.id, (error, deletedEntry) => {
+        res.redirect('/ally/entries');
+    });
+});
+
+/****************
 PUT
 ****************/
+
+// ally.put('/:id/complete-goal', (req, res) => {
+//     req.body.completed = true;
+//     Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
+//         res.redirect('/ally');
+//     });
+// });
 
 ally.put('/:id', (req, res) => {
     if (req.body.meditate === 'on') {
