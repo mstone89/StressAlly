@@ -61,6 +61,14 @@ ally.put('/:id', (req, res) => {
 POST
 ****************/
 
+// CREATE NEW ACTIVITY
+ally.post('/new-activity', (req, res) => {
+    req.body.active = false;
+    Activity.create(req.body, (error, createdActivity) => {
+        res.redirect('/ally/new-activity');
+    });
+});
+
 // CREATE NEW GOAL
 ally.post('/new-goal', (req, res) => {
     req.body.completed = false;

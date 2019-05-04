@@ -10,13 +10,13 @@
         </div>
         <div class="container">
             <h3>Add a new activity</h3>
-            <form class="" action="index.html" method="POST">
+            <form class="" action="/ally/new-activity" method="POST">
                 <input type="text" name="name" placeholder="activity name">
                 <input type="submit" name="" value="create">
             </form>
             <h3>Choose an activity</h3>
             <% for (let i = 0; i < activities.length; i++) { %>
-                <form class="" action="index.html" method="POST">
+                <form action="index.html" method="POST">
                     <input type="submit" name="active" value="<%=activities[i].name%>"/>
                 </form>
             <% } %>
