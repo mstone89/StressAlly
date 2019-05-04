@@ -2,15 +2,16 @@
 <html lang="en" dir="ltr">
     <head>
         <% include ./partials/head.ejs %>
-        <link type="text/css" rel="stylesheet" href="./css/style.css">
     </head>
     <body>
         <div class="container top">
-            <!-- ADD IMAGE HERE -->
+            <img class="img-fluid" src="/images/main_image.jpg" alt=""/>
             <div class="container header">
-                <h1 class="display-3">Welcome to StressAlly!</h1>
+                <h1 class="display-2">Welcome to StressAlly!</h1>
                 <h3>Everyone Needs An Ally Once In A While</h3>
-                <a href="/ally"><button class="btn btn-outline-primary btn-lg get-started" type="button" name="get-started">Get Started</button></a>
+                <a href="/ally">
+                    <button class="btn btn-light btn-lg get-started" type="button" name="get-started">Get Started</button>
+                </a>
             </div>
         </div>
         <div class="container main">
@@ -34,9 +35,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer navbar-fixed-bottom">
-            Made By Molly Stone
         </div>
     </body>
 </html>

@@ -182,7 +182,6 @@ ally.get('/entries', (req, res) => {
         });
         res.render('ally/entries.ejs', {
             entries: allEntries,
-
         });
     });
 });

@@ -12,10 +12,21 @@ body {
 
 .top {
     height: 500px;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    color: white;
+    margin-bottom: 3em;
+}
+
+img {
+    position: absolute;
 }
 
 .header {
     margin-top: 125px;
+    position: relative;
+    padding-left: 4em;
 }
 
 .get-started {
@@ -24,8 +35,11 @@ body {
 }
 
 .main {
-    left: 0;
-    bottom: 0;
+    padding: 0;
+}
+
+.jumbotron {
+    margin: 0 3em 2em 3em;
 }
 
 .content {
@@ -33,15 +47,5 @@ body {
 }
 
 .col-sm {
-    padding-bottom:
-}
-
-/* https://www.w3schools.com/howto/howto_css_fixed_footer.asp */
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 1em;
+    margin-bottom: 3em;
 }
