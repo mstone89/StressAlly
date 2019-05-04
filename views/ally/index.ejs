@@ -15,7 +15,7 @@
                     <% for (let i = goals.length; i > goals.length - 1; i--) { %>
                         <% if (goals[goals.length - 1].completed === false) { %>
                             <h2><%=goals[goals.length - 1].description%></h2>
-                            <form action="/ally/<%=goals[goals.length - 1].id%>/complete-goal?_method=PUT" method="POST">
+                            <form action="/ally/complete-goal/<%=goals[goals.length - 1].id%>?_method=PUT" method="POST">
                                 <button type="submit" name="completed">Goal Completed</button>
                             </form>
                         <% } else { %>

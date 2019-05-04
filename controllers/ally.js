@@ -36,7 +36,7 @@ ally.put('/activity/:id', (req, res) => {
 });
 
 // COMPLETE GOAL
-ally.put('/:id/complete-goal', (req, res) => {
+ally.put('/complete-goal/:id', (req, res) => {
     req.body.completed = true;
     Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
         res.redirect('/ally');
