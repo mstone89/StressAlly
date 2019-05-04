@@ -39,9 +39,15 @@ PUT
 
 // CHOOSE NEW ACTIVITY
 ally.put('/activity/:id', (req, res) => {
-    Activity.findByIdAndUpdate(req.params.id, {active: true}, {new:true}, (error, activity) => {
-        res.redirect('/ally');
+    Activity.updateMany({}, {active: false}, {new: true}, (error, data) => {
+        console.log(data);
+        Activity.findByIdAndUpdate(req.params.id, {active: true}, {new:true}, (error, activity) => {
+            console.log(req.params.id);
+            res.redirect('/ally');
+        });
+
     });
+
 });
 
 // COMPLETE ACTIVITY
@@ -111,7 +117,7 @@ ally.post('/', (req, res) => {
     } else {
         req.body.exercise = false;
     }
-    req.body.date = req.body.date.default;
+    req.body.date = moment();
     req.body.rating = parseInt(req.body.rating);
     req.body.sleep = parseInt(req.body.sleep);
     Entry.create(req.body, (error, createdEntry) => {
