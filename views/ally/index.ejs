@@ -34,15 +34,16 @@
                     <% for (let i = 0; i < activities.length; i++) { %>
                         <% if (activities[i].active === true) { %>
                             <h2><%=activities[i].name%></h2>
-                            <form class="">
+                            <form action="/ally/activity/complete-activity/<%=activities[i].id%>?_method=PUT" method="POST">
                                 <button type="submit" name="completed">Activity Completed</button>
                             </form>
-                            <% break %>
                         <% } %>
                     <% } %>
-                    <h2>choose new activity</h2>
-                    <a href="/ally/new-activity"><button type="submit" name="new-activity">New Activity</button></a>
+                <% } else { %>
+                    <h2>choose one</h2>
+                    <a href="/ally/new-activity"><button>New Activity</button></a>
                 <% } %>
+                <a href="/ally/new-activity"><button>New Activity</button></a>
             </div>
         </div>
         <div class="container">

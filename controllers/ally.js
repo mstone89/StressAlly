@@ -10,11 +10,11 @@ const seedActivities = require('../models/activitiesSeed.js');
 SEED
 ****************/
 
-// ally.get('/seed/activities', (req, res) => {
-//     Activity.create(seedActivities, (error, createdActivities) => {
-//         res.redirect('/ally');
-//     });
-// });
+ally.get('/seed/activities', (req, res) => {
+    Activity.create(seedActivities, (error, createdActivities) => {
+        res.redirect('/ally');
+    });
+});
 
 /****************
 DELETE
@@ -30,9 +30,25 @@ ally.delete('/:id', (req, res) => {
 PUT
 ****************/
 
-// // CHOOSE NEW ACTIVITY
+// // CHOOSE NEW ACTIVITY FROM INDEX
+// ally.put('/acivitity/choose-new/:id', (req, res) => {
+//     Activity.findByIdAndUpdate(req.params.id, {active: false}, {new: true}, (error, activity) => {
+//         res.redirect('/ally/new-activity')
+//     });
+// });
+
+// CHOOSE NEW ACTIVITY
 ally.put('/activity/:id', (req, res) => {
-    res.send('route working');
+    Activity.findByIdAndUpdate(req.params.id, {active: true}, {new:true}, (error, activity) => {
+        res.redirect('/ally');
+    });
+});
+
+// COMPLETE ACTIVITY
+ally.put('/activity/complete-activity/:id', (req, res) => {
+    Activity.findByIdAndUpdate(req.params.id, {active: false}, {new: true}, (error, data) => {
+        res.redirect('/ally');
+    });
 });
 
 // COMPLETE GOAL
@@ -117,6 +133,7 @@ ally.get('/new-goal', (req, res) => {
     });
 });
 
+// NEW ACTIVITY ROUTE
 ally.get('/new-activity', (req, res) => {
     Activity.find({}, (error, allActivities) => {
         res.render('ally/new-activity.ejs', {
