@@ -37,6 +37,9 @@ img {
     margin: 3em 0;
     padding: 1em 3em;
 }
+.back-to-main {
+    margin: 2em 0;
+}
 
 .complete-activity {
     display: inline;
@@ -45,6 +48,10 @@ img {
 
 .main {
     padding: 0;
+}
+
+.fieldset {
+    margin: 0 auto;
 }
 
 .jumbotron {
