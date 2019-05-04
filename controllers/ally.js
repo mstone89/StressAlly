@@ -1,8 +1,20 @@
 const express = require('express');
+const moment = require('moment');
 const ally = express.Router();
 const Entry = require('../models/entries.js');
 const Activity = require('../models/activities.js');
 const Goal = require('../models/goals.js');
+const seedActivities = require('../models/activitiesSeed.js');
+
+/****************
+SEED
+****************/
+
+// ally.get('/seed/activities', (req, res) => {
+//     Activity.create(seedActivities, (error, createdActivities) => {
+//         res.redirect('/ally');
+//     });
+// });
 
 /****************
 DELETE
@@ -18,6 +30,7 @@ ally.delete('/:id', (req, res) => {
 PUT
 ****************/
 
+// COMPLETE GOAL
 ally.put('/:id/complete-goal', (req, res) => {
     req.body.completed = true;
     Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
@@ -103,10 +116,13 @@ ally.get('/completed-goals', (req, res) => {
 // INDEX ROUTE
 ally.get('/', (req, res) => {
     Goal.find({}, (error, allGoals) => {
-        res.render('ally/index.ejs', {
-            goals: allGoals
+        Activity.find({}, (error, allActivities) => {
+            res.render('ally/index.ejs', {
+                goals: allGoals,
+                activities: allActivities
+            });
         });
-    })
+    });
 });
 
 // NEW ENTRY ROUTE
@@ -117,7 +133,6 @@ ally.get('/new-entry', (req, res) => {
 // SHOW ALL ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
     Entry.find({}, (error, allEntries) => {
-        // console.log(allEntries);
         res.render('ally/entries.ejs', {
             entries: allEntries
         });
