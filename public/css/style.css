@@ -19,12 +19,16 @@ body {
     margin-bottom: 3em;
 }
 
+h1 {
+    font-size: 5em;
+}
+
 img {
     position: absolute;
 }
 
 .header {
-    margin-top: 125px;
+    margin-top: 75px;
     position: relative;
     padding-left: 4em;
 }
