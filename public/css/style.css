@@ -38,6 +38,11 @@ img {
     padding: 1em 3em;
 }
 
+.complete-activity {
+    display: inline;
+    margin-right: 20px;
+}
+
 .main {
     padding: 0;
 }
@@ -52,4 +57,12 @@ img {
 
 .col-sm {
     margin-bottom: 3em;
+}
+
+.col-sm-3 {
+    margin: 0 2em;
+}
+
+.card {
+    width: 18em;
 }

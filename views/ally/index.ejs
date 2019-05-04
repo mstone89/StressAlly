@@ -5,7 +5,7 @@
     </head>
     <body>
         <div class="container top">
-            <!-- ADD IMAGE HERE -->
+            <img class="img-fluid" src="/images/app_image.jpg" alt=""/>
             <div class="row header">
                 <div class="col-md goal">
                     <h1 class="display-3">I want to:</h1>
@@ -14,16 +14,16 @@
                             <% if (goals[goals.length - 1].completed === false) { %>
                                 <h2><%=goals[goals.length - 1].description%></h2>
                                 <form action="/ally/complete-goal/<%=goals[goals.length - 1].id%>?_method=PUT" method="POST">
-                                    <button type="submit" name="completed">Goal Completed</button>
+                                    <button class="btn btn-light" type="submit" name="completed">Goal Completed</button>
                                 </form>
                             <% } else { %>
                                 <h2>set a new goal</h2>
-                                <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>%>
+                                <a href="/ally/new-goal"><button class="btn btn-light" type="button" name="new-goal">New Goal</button></a>%>
                             <% } %>
                         <% } %>
                     <% } else { %>
                         <h2>set a new goal</h2>
-                        <a href="/ally/new-goal"><button type="button" name="new-goal">New Goal</button></a>%>
+                        <a href="/ally/new-goal"><button class="btn btn-light" type="button" name="new-goal">New Goal</button></a>%>
                     <% } %>
                 </div>
                 <div class="col-md activity">
@@ -32,8 +32,8 @@
                         <% for (let i = 0; i < activities.length; i++) { %>
                             <% if (activities[i].active === true) { %>
                                 <h2><%=activities[i].name%></h2>
-                                <form action="/ally/activity/complete-activity/<%=activities[i].id%>?_method=PUT" method="POST">
-                                    <button type="submit" name="completed">Activity Completed</button>
+                                <form class="complete-activity" action="/ally/activity/complete-activity/<%=activities[i].id%>?_method=PUT" method="POST">
+                                    <button class="btn btn-light" type="submit" name="completed">Activity Completed</button>
                                 </form>
                             <% } %>
                         <% } %>
@@ -41,36 +41,49 @@
                         <h2>choose one</h2>
                         <a href="/ally/new-activity"><button>New Activity</button></a>
                     <% } %>
-                    <a href="/ally/new-activity"><button>New Activity</button></a>
+                    <a href="/ally/new-activity"><button class="new-activity btn btn-light">New Activity</button></a>
                 </div>
             </div>
-
         </div>
-        <div class="container content">
-            <div class="row">
-                <div class="col-sm">
-                    <h5>New Entry</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    <a href="/ally/new-entry"><button type="button" name="new-entry">New Entry</button></a>
+        <div class="container">
+            <div class="jumbotron">
+                <h4>Headline</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</p>
+            </div>
+        </div>
+        <div class="container cards">
+            <div class="row d-flex justify-content-center">
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img src="#" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">Track Your Anxiety</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                            <a href="/ally/new-entry"><button class="btn btn-info" type="button" name="new-entry">New Entry</button></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm">
-                    <h5>View Entries</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    <a href="/ally/entries"><button type="button" name="entries">Your Entries</button></a>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img src="#" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">View Entries</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                            <a href="/ally/entries"><button class="btn btn-info" type="button" name="entries">Your Entries</button></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm">
-                    <h5>Completed Goals</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                    <a href="/ally/completed-goals"><button type="button" name="goals">Completed Goals</button></a>
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img src="#" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">Completed Goals</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                            <a href="/ally/completed-goals"><button class="btn btn-info" type="button" name="goals">Completed Goals</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-
-            <!-- <a href="#"><button type="button" name="resources">Your Resources</button></a> -->
-        </div>
-        <div class="footer navbar-fixed-bottom">
-            Made By Molly Stone
         </div>
     </body>
 </html>
