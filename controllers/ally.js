@@ -30,6 +30,11 @@ ally.delete('/:id', (req, res) => {
 PUT
 ****************/
 
+// // CHOOSE NEW ACTIVITY
+ally.put('/activity/:id', (req, res) => {
+    res.send('route working');
+});
+
 // COMPLETE GOAL
 ally.put('/:id/complete-goal', (req, res) => {
     req.body.completed = true;
@@ -39,7 +44,7 @@ ally.put('/:id/complete-goal', (req, res) => {
 });
 
 // EDIT SINGLE ENTRY
-ally.put('/:id', (req, res) => {
+ally.put('/entry/:id', (req, res) => {
     if (req.body.meditate === 'on') {
         req.body.meditate = true;
     } else {
