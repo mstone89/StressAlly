@@ -62,6 +62,10 @@ img {
     padding-top: 2.5em;
 }
 
+.entry-content {
+    margin-bottom: 50px;
+}
+
 .col-sm {
     margin-bottom: 3em;
 }
@@ -72,4 +76,9 @@ img {
 
 .card {
     width: 18em;
+}
+
+.delete {
+    display: inline;
+    margin-left: 20px;
 }

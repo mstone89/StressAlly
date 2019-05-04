@@ -5,11 +5,14 @@
     </head>
     <body>
         <div class="container top">
+            <img class="img-fluid" src="/images/entry_image.jpg" alt=""/>
             <div class="container header">
                 <h1>Your Entry</h1>
+                <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate illo sapiente, tempore tempora, laudantium repellendus modi quaerat veniam reprehenderit.</h5>
+                <a href="/ally"><button class="btn btn-light btn-lg back-to-main" type="button" name="back">Back To Main</button></a>
             </div>
         </div>
-        <div class="container">
+        <div class="container entry-content">
             <dl>
                 <dt>Date:</dt>
                 <dd><%=entry.date%></dd>
@@ -50,11 +53,10 @@
                     <% } %>
                 </dd>
             </dl>
-            <a href="/ally/<%=entry.id%>/edit"><button>Edit Entry</button></a>
-            <form action="/ally/<%=entry.id%>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete Entry"/>
+            <a href="/ally/<%=entry.id%>/edit"><button class="btn btn-info">Edit Entry</button></a>
+            <form class="delete" action="/ally/<%=entry.id%>?_method=DELETE" method="POST">
+                <input class="btn btn-outline-danger" type="submit" value="Delete Entry"/>
             </form>
         </div>
-        <a href="/ally/entries"><button type="button" name="back">Back To Entries</button></a>
     </body>
 </html>
