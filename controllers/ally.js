@@ -177,8 +177,12 @@ ally.get('/new-entry', (req, res) => {
 // SHOW ALL ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
     Entry.find({}, (error, allEntries) => {
+        allEntries.forEach((entry) => {
+            console.log(moment(entry.date).format('MM/DD/YYYY'));
+        });
         res.render('ally/entries.ejs', {
-            entries: allEntries
+            entries: allEntries,
+
         });
     });
 });
