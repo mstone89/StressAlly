@@ -30,13 +30,18 @@
             </div>
             <div class="activity">
                 <h1>My next activity:</h1>
-                <!-- EJS CONDITIONALS -->
-                <form class="">
-                    <button type="submit" name="completed">Activity Completed</button>
-                </form>
-                <form class="">
-                    <button type="submit" name="new-activity">New Activity</button>
-                </form>
+                <% if (activities.length) { %>
+                    <% for (let i = 0; i < activities.length; i++) { %>
+                        <% if (activities[i].active === true) { %>
+                            <h2><%=activities[i].name%></h2>
+                            <form class="">
+                                <button type="submit" name="completed">Activity Completed</button>
+                            </form>
+                            <% break %>
+                        <% } %>
+                    <% } %>
+                    <a href="/ally/new-activity"><button type="submit" name="new-activity">New Activity</button></a>
+                <% } %>
             </div>
         </div>
         <div class="container">

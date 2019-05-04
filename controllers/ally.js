@@ -104,6 +104,14 @@ ally.get('/new-goal', (req, res) => {
     });
 });
 
+ally.get('/new-activity', (req, res) => {
+    Activity.find({}, (error, allActivities) => {
+        res.render('ally/new-activity.ejs', {
+            activities: allActivities
+        });
+    });
+});
+
 // SHOW COMPLETED GOALS
 ally.get('/completed-goals', (req, res) => {
     Goal.find({}, (error, allGoals) => {

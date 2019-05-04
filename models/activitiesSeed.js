@@ -1,23 +1,30 @@
 module.exports = [
     {
-        name: 'tai chi'
+        name: 'tai chi',
+        active: false
     },
     {
-        name: 'meditation'
+        name: 'meditation',
+        active: false
     },
     {
-        name: 'acupuncture'
+        name: 'acupuncture',
+        active: false
     },
     {
-        name: 'cardio workout'
+        name: 'cardio workout',
+        active: false
     },
     {
-        name: 'go for a run'
+        name: 'go for a run',
+        active: false
     },
     {
-        name: 'go for a walk'
+        name: 'go for a walk',
+        active: false
     },
     {
-        name: 'practice deep breathing'
+        name: 'practice deep breathing',
+        active: false
     }
 ];
