@@ -6,6 +6,7 @@ const express = require('express');
 const methodOverride  = require('method-override');
 const mongoose = require('mongoose');
 const moment = require('moment');
+const session = require('express-session');
 require('dotenv').config();
 const app = express();
 const db = mongoose.connection;
@@ -56,13 +57,21 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
-app.use('/ally', allyController);
-
 const userController = require('./controllers/users.js');
-app.use('/users', userController);
 
 const sessionsController = require('./controllers/sessions.js')
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use('/users', userController);
+
 app.use('/sessions', sessionsController)
+
+app.use('/ally', allyController);
 
 //___________________
 // Routes
@@ -70,7 +79,9 @@ app.use('/sessions', sessionsController)
 
 //localhost:3000
 app.get('/', (req, res) => {
-  res.render('index.ejs');
+    res.render('index.ejs', {
+      currentUser: req.session.currentUser
+    });
 });
 
 //___________________
