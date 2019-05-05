@@ -119,7 +119,12 @@ ally.post('/', (req, res) => {
     } else {
         req.body.exercise = false;
     }
-    req.body.date = moment();
+    req.body.date = new Date();
+    let date = req.body.date;
+    date = date.toISOString();
+    date = moment(date).format('MM/DD/YYYY');
+    req.body.date = date;
+    console.log(date);
     req.body.rating = parseInt(req.body.rating);
     req.body.sleep = parseInt(req.body.sleep);
     Entry.create(req.body, (error, createdEntry) => {
@@ -183,9 +188,12 @@ ally.get('/new-entry', (req, res) => {
 // SHOW ALL ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
     Entry.find({}, (error, allEntries) => {
-        allEntries.forEach((entry) => {
-            console.log(moment(entry.date).format('MM/DD/YYYY'));
-        });
+        // for (let i = 0; i < allEntries.length; i++) {
+        //     let date = allEntries[i].date;
+        //     date = date.toISOString();
+        //     date = moment(date).format('MM/DD/YYYY');
+        //     console.log(date);
+        // }
         res.render('ally/entries.ejs', {
             entries: allEntries
         });

@@ -16,10 +16,7 @@ const entrySchema = new mongoose.Schema({
     meditate: Boolean,
     exercise: Boolean,
     comments: String,
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    date: String
 }, {
     timestamps: true
 });
