@@ -4,6 +4,8 @@ const ally = express.Router();
 const Entry = require('../models/entries.js');
 const Activity = require('../models/activities.js');
 const Goal = require('../models/goals.js');
+const User = require('../models/users.js');
+const session = require('express-session');
 const seedActivities = require('../models/activitiesSeed.js');
 
 /****************
@@ -159,14 +161,18 @@ ally.get('/completed-goals', (req, res) => {
 
 // INDEX ROUTE
 ally.get('/', (req, res) => {
-    Goal.find({}, (error, allGoals) => {
-        Activity.find({}, (error, allActivities) => {
-            res.render('ally/index.ejs', {
-                goals: allGoals,
-                activities: allActivities
+    if (req.session.currentUser) {
+        Goal.find({}, (error, allGoals) => {
+            Activity.find({}, (error, allActivities) => {
+                res.render('ally/index.ejs', {
+                    goals: allGoals,
+                    activities: allActivities
+                });
             });
         });
-    });
+    } else {
+        res.redirect('/sessions/new');
+    }
 });
 
 // NEW ENTRY ROUTE
