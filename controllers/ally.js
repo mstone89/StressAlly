@@ -127,6 +127,7 @@ ally.post('/', (req, res) => {
     console.log(date);
     req.body.rating = parseInt(req.body.rating);
     req.body.sleep = parseInt(req.body.sleep);
+    console.log(req.body);
     Entry.create(req.body, (error, createdEntry) => {
         console.log(createdEntry);
         res.redirect('/ally');

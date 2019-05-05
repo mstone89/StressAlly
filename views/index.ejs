@@ -7,8 +7,8 @@
         <div class="container top">
             <img class="img-fluid" src="/images/main_image.jpg" alt=""/>
             <div class="container header">
-                <% if(currentUser) { %>
-                    <h1>Welcome, <%=currentUser.username%>.</h1>
+                <% if (currentUser) { %>
+                    <h1>Welcome, <%=currentUser.username%></h1>
                     <a class="btn btn-light btn-lg get-started" href="/ally">Get Started</a>
                     <form class="logout" action="/sessions?_method=DELETE" method="POST">
                         <input class="btn btn-light btn-lg get-started" type="submit" value="Log Out">
