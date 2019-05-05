@@ -7,13 +7,19 @@
         <div class="container top">
             <img class="img-fluid" src="/images/main_image.jpg" alt=""/>
             <div class="container header">
-                <h1>Welcome to StressAlly</h1>
-                <h3>Everyone Needs An Ally Once In A While</h3>
-                <a href="/users/new" class="btn btn-light btn-lg get-started">Sign Up</a>
-                <a href="/sessions/new" class="btn btn-light btn-lg get-started">Log In</a>
-                <!-- <a href="/ally">
-                    <button class="btn btn-light btn-lg get-started" type="button" name="get-started">Get Started</button>
-                </a> -->
+                <% if(currentUser) { %>
+                    <h1>Welcome, <%=currentUser.username%>.</h1>
+                    <a class="btn btn-light btn-lg get-started" href="/sessions/">Log Out</a>
+                    <a class="btn btn-light btn-lg get-started" href="/ally">Get Started</a>
+                <% } else { %>
+                    <h1>Welcome to StressAlly</h1>
+                    <h3>Everyone Needs An Ally Once In A While</h3>
+                    <a href="/users/new" class="btn btn-light btn-lg get-started">Sign Up</a>
+                    <a href="/sessions/new" class="btn btn-light btn-lg get-started">Log In</a>
+                    <!-- <a href="/ally">
+                        <button class="btn btn-light btn-lg get-started" type="button" name="get-started">Get Started</button>
+                    </a> -->
+                <% } %>
             </div>
         </div>
         <div class="container main">

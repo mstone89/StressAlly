@@ -181,7 +181,7 @@ ally.get('/entries', (req, res) => {
             console.log(moment(entry.date).format('MM/DD/YYYY'));
         });
         res.render('ally/entries.ejs', {
-            entries: allEntries,
+            entries: allEntries
         });
     });
 });
