@@ -6,6 +6,7 @@ const express = require('express');
 const methodOverride  = require('method-override');
 const mongoose = require('mongoose');
 const moment = require('moment');
+require('dotenv').config();
 const app = express();
 const db = mongoose.connection;
 
@@ -30,7 +31,7 @@ const allyController = require('./controllers/ally.js');
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/stress-ally-app';
 
 // Connect to Mongo
-mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true});
+mongoose.connect(MONGODB_URI,  { useNewUrlParser: true});
 
 // Error / success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
