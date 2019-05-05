@@ -6,6 +6,12 @@ sessions.get('/new', (req, res) => {
     res.render('sessions/new-session.ejs');
 });
 
+sessions.delete('/', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
+
 sessions.post('/', (req, res) => {
     console.log(req.body);
     User.findOne({username: req.body.username}, (error, foundUser) => {

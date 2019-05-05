@@ -37,6 +37,11 @@ img {
     margin: 3em 0;
     padding: 1em 3em;
 }
+
+.logout {
+    display: inline;
+}
+
 .back-to-main {
     margin: 2em 0;
 }

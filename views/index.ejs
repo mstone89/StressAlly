@@ -9,8 +9,10 @@
             <div class="container header">
                 <% if(currentUser) { %>
                     <h1>Welcome, <%=currentUser.username%>.</h1>
-                    <a class="btn btn-light btn-lg get-started" href="/sessions/">Log Out</a>
                     <a class="btn btn-light btn-lg get-started" href="/ally">Get Started</a>
+                    <form class="logout" action="/sessions?_method=DELETE" method="POST">
+                        <input class="btn btn-light btn-lg get-started" type="submit" value="Log Out">
+                    </form>
                 <% } else { %>
                     <h1>Welcome to StressAlly</h1>
                     <h3>Everyone Needs An Ally Once In A While</h3>
