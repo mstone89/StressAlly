@@ -58,6 +58,9 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
 app.use('/ally', allyController);
 
+const userController = require('./controllers/users.js');
+app.use('/users', userController);
+
 //___________________
 // Routes
 //___________________
