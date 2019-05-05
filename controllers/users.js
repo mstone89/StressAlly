@@ -1,9 +1,19 @@
 const express = require('express');
-const user = express.Router();
+const users = express.Router();
 const User = require('../models/users.js');
 
-user.get('/new', (req, res) => {
+users.get('/new', (req, res) => {
     res.render('users/new-user.ejs');
 });
 
-module.exports = user;
+users.post('/', (req, res) => {
+    User.create(req.body, (error, createdUser) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(createdUser);
+        res.redirect('/');
+    });
+});
+
+module.exports = users;
