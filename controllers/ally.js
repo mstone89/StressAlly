@@ -9,13 +9,16 @@ const session = require('express-session');
 const seedActivities = require('../models/activitiesSeed.js');
 
 /****************
-SEED
+SEED ACTIVITIES
 ****************/
 
-ally.get('/seed/activities', (req, res) => {
-    Activity.create(seedActivities, (error, createdActivities) => {
-        res.redirect('/ally');
-    });
+// https://stackoverflow.com/questions/35443821/find-and-count-elements-of-collection-with-mongoose
+Activity.find().exec((error, data) => {
+    let count = data.length;
+    if (count === 0) {
+        Activity.create(seedActivities, (error, createdActivities) => {});
+    }
+    console.log(count);
 });
 
 /****************
@@ -23,8 +26,13 @@ DELETE
 ****************/
 
 ally.delete('/:id', (req, res) => {
-    Entry.findByIdAndRemove(req.params.id, (error, deletedEntry) => {
-        res.redirect('/ally/entries');
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        Entry.findByIdAndRemove(req.params.id, (error, deletedEntry) => {
+            foundUser.entries.id(req.params.id).remove();
+            foundUser.save((error, data) => {
+                res.redirect('/ally/entries');
+            });
+        });
     });
 });
 
@@ -34,10 +42,12 @@ PUT
 
 // CHOOSE NEW ACTIVITY
 ally.put('/activity/:id', (req, res) => {
-    Activity.updateMany({}, {active: false}, {new: true}, (error, data) => {
-        console.log(data);
-        Activity.findByIdAndUpdate(req.params.id, {active: true}, {new:true}, (error, activity) => {
-            console.log(req.params.id);
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        for (let i = 0; i < foundUser.activities.length; i++) {
+            foundUser.activities[i].active = false;
+        }
+        foundUser.activities.id(req.params.id).active = true;
+        foundUser.save((error, data) => {
             res.redirect('/ally');
         });
     });
@@ -45,16 +55,25 @@ ally.put('/activity/:id', (req, res) => {
 
 // COMPLETE ACTIVITY
 ally.put('/activity/complete-activity/:id', (req, res) => {
-    Activity.findByIdAndUpdate(req.params.id, {active: false}, {new: true}, (error, data) => {
-        res.redirect('/ally');
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        foundUser.activities.id(req.params.id).active = false;
+        foundUser.save((error, data) => {
+            res.redirect('/ally');
+        });
     });
 });
 
 // COMPLETE GOAL
 ally.put('/complete-goal/:id', (req, res) => {
     req.body.completed = true;
-    Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
-        res.redirect('/ally');
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        Goal.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedGoal) => {
+            foundUser.goals.id(req.params.id).remove();
+            foundUser.goals.push(updatedGoal);
+            foundUser.save((error, data) => {
+                res.redirect('/ally');
+            });
+        });
     });
 });
 
@@ -72,8 +91,14 @@ ally.put('/entry/:id', (req, res) => {
     }
     req.body.rating = parseInt(req.body.rating);
     req.body.sleep = parseInt(req.body.sleep);
-    Entry.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedEntry) => {
-        res.redirect('/ally/' + req.params.id);
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        Entry.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedEntry) => {
+            foundUser.entries.id(req.params.id).remove();
+            foundUser.entries.push(updatedEntry);
+            foundUser.save((error, data) => {
+                res.redirect('/ally/' + req.params.id);
+            });
+        });
     });
 });
 
@@ -85,19 +110,32 @@ POST
 ally.post('/new-activity', (req, res) => {
     req.body.active = false;
     console.log(req.body);
-    Activity.create(req.body, (error, createdActivity) => {
-        res.redirect('/ally/new-activity');
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        Activity.create(req.body, (error, createdActivity) => {
+            foundUser.activities.push(createdActivity);
+            console.log(createdActivity);
+            Activity.findOneAndDelete({'name': createdActivity.name}, (error, removedActivity) => {});
+            foundUser.save((error, data) => {
+                res.redirect('/ally/new-activity');
+            });
+        });
     });
+    console.log(req.session.currentUser);
 });
 
 // CREATE NEW GOAL
 ally.post('/new-goal', (req, res) => {
     req.body.completed = false;
-    console.log(req.body);
-    Goal.create(req.body, (error, createdGoal) => {
-        console.log(createdGoal);
-        res.redirect('/ally');
+    console.log(req.session.currentUser._id);
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        Goal.create(req.body, (error, createdGoal) => {
+            foundUser.goals.push(createdGoal);
+            foundUser.save((error, data) => {
+                res.redirect('/ally');
+            });
+        });
     });
+    console.log(req.session.currentUser);
 });
 
 // CREATE NEW ENTRY
@@ -126,8 +164,8 @@ ally.post('/', (req, res) => {
                 res.redirect('/ally');
             });
         });
-        console.log(req.session.currentUser._id);
     });
+    console.log(req.session.currentUser);
 });
 
 /****************
@@ -136,27 +174,27 @@ GET
 
 // NEW GOAL ROUTE
 ally.get('/new-goal', (req, res) => {
-    Goal.find({}, (error, allGoals) => {
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
         res.render('ally/new-goal.ejs', {
-            goals: allGoals
+            goals: foundUser.goals
         });
     });
 });
 
 // NEW ACTIVITY ROUTE
 ally.get('/new-activity', (req, res) => {
-    Activity.find({}, (error, allActivities) => {
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
         res.render('ally/new-activity.ejs', {
-            activities: allActivities
+            activities: foundUser.activities
         });
     });
 });
 
 // SHOW COMPLETED GOALS
 ally.get('/completed-goals', (req, res) => {
-    Goal.find({}, (error, allGoals) => {
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
         res.render('ally/show-goals.ejs', {
-            goals: allGoals
+            goals: foundUser.goals
         });
     });
 });
@@ -164,21 +202,24 @@ ally.get('/completed-goals', (req, res) => {
 // INDEX ROUTE
 ally.get('/', (req, res) => {
     if (req.session.currentUser) {
-        console.log(req.session.currentUser);
-        User.findById({'_id': req.session.currentUser._id}, (error, userData) => {
-            Goal.find({}, (error, allGoals) => {
+        User.findById(req.session.currentUser._id, (error, foundUser) => {
+            if (foundUser.activities.length === 0) {
                 Activity.find({}, (error, allActivities) => {
-                    res.render('ally/index.ejs', {
-                        goals: allGoals,
-                        activities: allActivities
-                    });
+                    for (let i = 0; i < allActivities.length; i++) {
+                        foundUser.activities.push(allActivities[i]);
+                        foundUser.save((error, data) => {});
+                    }
                 });
+            }
+            res.render('ally/index.ejs', {
+                goals: foundUser.goals,
+                activities: foundUser.activities
             });
         });
     } else {
         res.redirect('/sessions/new');
     }
-});
+}); 
 
 // NEW ENTRY ROUTE
 ally.get('/new-entry', (req, res) => {
@@ -187,27 +228,27 @@ ally.get('/new-entry', (req, res) => {
 
 // SHOW ALL ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
-    Entry.find({}, (error, allEntries) => {
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
         res.render('ally/entries.ejs', {
-            entries: allEntries
+            entries: foundUser.entries
         });
     });
 });
 
 // EDIT SINGLE ENTRY ROUTE
 ally.get('/:id/edit', (req, res) => {
-    Entry.findById(req.params.id, (error, foundEntry) => {
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
         res.render('ally/edit-entry.ejs', {
-            entry: foundEntry
+            entry: foundUser.entries.id(req.params.id)
         });
     });
 });
 
 // SHOW SINGLE ENTRY
 ally.get('/:id', (req, res) => {
-    Entry.findById(req.params.id, (error, foundEntry) => {
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
         res.render('ally/show-entry.ejs', {
-            entry: foundEntry
+            entry: foundUser.entries.id(req.params.id)
         });
     });
 });
