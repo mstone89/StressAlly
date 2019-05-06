@@ -117,13 +117,16 @@ ally.post('/', (req, res) => {
     date = date.toISOString();
     date = moment(date).format('MM/DD/YYYY');
     req.body.date = date;
-    console.log(date);
     req.body.rating = parseInt(req.body.rating);
     req.body.sleep = parseInt(req.body.sleep);
-    console.log(req.body);
-    Entry.create(req.body, (error, createdEntry) => {
-        console.log(createdEntry);
-        res.redirect('/ally');
+    User.findById(req.session.currentUser._id, (error, foundUser) => {
+        Entry.create(req.body, (error, createdEntry) => {
+            foundUser.entries.push(createdEntry);
+            foundUser.save((error, data) => {
+                res.redirect('/ally');
+            });
+        });
+        console.log(req.session.currentUser._id);
     });
 });
 
@@ -161,11 +164,14 @@ ally.get('/completed-goals', (req, res) => {
 // INDEX ROUTE
 ally.get('/', (req, res) => {
     if (req.session.currentUser) {
-        Goal.find({}, (error, allGoals) => {
-            Activity.find({}, (error, allActivities) => {
-                res.render('ally/index.ejs', {
-                    goals: allGoals,
-                    activities: allActivities
+        console.log(req.session.currentUser);
+        User.findById({'_id': req.session.currentUser._id}, (error, userData) => {
+            Goal.find({}, (error, allGoals) => {
+                Activity.find({}, (error, allActivities) => {
+                    res.render('ally/index.ejs', {
+                        goals: allGoals,
+                        activities: allActivities
+                    });
                 });
             });
         });
