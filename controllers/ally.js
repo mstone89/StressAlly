@@ -32,13 +32,6 @@ ally.delete('/:id', (req, res) => {
 PUT
 ****************/
 
-// // CHOOSE NEW ACTIVITY FROM INDEX
-// ally.put('/acivitity/choose-new/:id', (req, res) => {
-//     Activity.findByIdAndUpdate(req.params.id, {active: false}, {new: true}, (error, activity) => {
-//         res.redirect('/ally/new-activity')
-//     });
-// });
-
 // CHOOSE NEW ACTIVITY
 ally.put('/activity/:id', (req, res) => {
     Activity.updateMany({}, {active: false}, {new: true}, (error, data) => {
@@ -47,9 +40,7 @@ ally.put('/activity/:id', (req, res) => {
             console.log(req.params.id);
             res.redirect('/ally');
         });
-
     });
-
 });
 
 // COMPLETE ACTIVITY
@@ -191,12 +182,6 @@ ally.get('/new-entry', (req, res) => {
 // SHOW ALL ENTRIES ROUTE
 ally.get('/entries', (req, res) => {
     Entry.find({}, (error, allEntries) => {
-        // for (let i = 0; i < allEntries.length; i++) {
-        //     let date = allEntries[i].date;
-        //     date = date.toISOString();
-        //     date = moment(date).format('MM/DD/YYYY');
-        //     console.log(date);
-        // }
         res.render('ally/entries.ejs', {
             entries: allEntries
         });
@@ -220,6 +205,5 @@ ally.get('/:id', (req, res) => {
         });
     });
 });
-
 
 module.exports = ally;
