@@ -93,6 +93,7 @@ POST
 // CREATE NEW ACTIVITY
 ally.post('/new-activity', (req, res) => {
     req.body.active = false;
+    console.log(req.body);
     Activity.create(req.body, (error, createdActivity) => {
         res.redirect('/ally/new-activity');
     });
@@ -101,6 +102,7 @@ ally.post('/new-activity', (req, res) => {
 // CREATE NEW GOAL
 ally.post('/new-goal', (req, res) => {
     req.body.completed = false;
+    console.log(req.body);
     Goal.create(req.body, (error, createdGoal) => {
         console.log(createdGoal);
         res.redirect('/ally');

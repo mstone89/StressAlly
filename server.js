@@ -23,6 +23,8 @@ const PORT = process.env.PORT || 3000;
 //___________________
 
 const allyController = require('./controllers/ally.js');
+const userController = require('./controllers/users.js');
+const sessionsController = require('./controllers/sessions.js');
 
 //___________________
 //Database
@@ -50,12 +52,12 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 app.use(express.static('public'));
 
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
-app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
-
-app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
+// extended: false - does not allow nested objects in query strings
+app.use(express.urlencoded({ extended: true }));
 
 //use method override
-app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
+// allow POST, PUT and DELETE from a form
+app.use(methodOverride('_method'));
 
 app.use(session({
     secret: process.env.SECRET,
@@ -63,10 +65,8 @@ app.use(session({
     saveUninitialized: false
 }));
 
-const userController = require('./controllers/users.js');
 app.use('/users', userController);
 
-const sessionsController = require('./controllers/sessions.js');
 app.use('/sessions', sessionsController);
 
 app.use('/ally', allyController);

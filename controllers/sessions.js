@@ -16,10 +16,13 @@ sessions.delete('/', (req, res) => {
 sessions.post('/', (req, res) => {
     console.log(req.body);
     User.findOne({username: req.body.username}, (error, foundUser) => {
-        console.log(foundUser);
-        if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-            req.session.currentUser = foundUser;
-            res.redirect('/');
+        if (foundUser) {
+            if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+                req.session.currentUser = foundUser;
+                res.redirect('/');
+            } else {
+                res.send('<a href="/sessions/new">wrong password</a>');
+            }
         } else {
             res.send('<a href="/sessions/new">wrong password</a>');
         }
