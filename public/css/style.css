@@ -16,7 +16,6 @@ body {
     position: relative;
     padding: 0;
     color: white;
-    margin-bottom: 3em;
 }
 
 h1 {
@@ -125,6 +124,15 @@ img {
 }
 
 @media (min-width: 500px) {
+    .top {
+        height: 600px;
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        color: white;
+        margin-bottom: 3em;
+    }
+
     h1 {
         font-size: 5em;
     }
