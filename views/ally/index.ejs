@@ -28,7 +28,6 @@
                 </div>
                 <div class="col-md activity">
                     <h1 class="display-3">My next activity:</h1>
-                    <% if (activities.length) { %>
                         <% for (let i = 0; i < activities.length; i++) { %>
                             <% if (activities[i].active === true) { %>
                                 <h2><%=activities[i].name%></h2>
@@ -37,10 +36,6 @@
                                 </form>
                             <% } %>
                         <% } %>
-                    <% } else { %>
-                        <h2>choose one</h2>
-                        <a href="/ally/new-activity"><button>New Activity</button></a>
-                    <% } %>
                     <a href="/ally/new-activity"><button class="new-activity btn btn-light">New Activity</button></a>
                 </div>
             </div>
