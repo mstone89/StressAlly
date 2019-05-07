@@ -27,6 +27,10 @@ img {
     position: absolute;
 }
 
+.sign-up-log-in {
+    display: inline;
+}
+
 .logout-small {
     position: relative;
     text-align: right;
