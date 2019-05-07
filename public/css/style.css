@@ -20,7 +20,11 @@ body {
 }
 
 h1 {
-    font-size: 5em;
+    font-size: 3em;
+}
+
+h3 {
+    font-size: 1.5em;
 }
 
 img {
@@ -42,8 +46,9 @@ img {
     position: relative;
     padding-left: 4em;
 }
+
 .get-started {
-    margin: 3em 0;
+    margin: 1em 0;
     padding: 1em 3em;
 }
 
@@ -117,4 +122,15 @@ img {
 
 .activity-btn {
     margin-bottom: 10px;
+}
+
+@media (min-width: 500px) {
+    h1 {
+        font-size: 5em;
+    }
+
+    .get-started {
+        margin: 3em 0;
+        padding: 1em 3em;
+    }
 }
