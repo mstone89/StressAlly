@@ -81,6 +81,16 @@ img {
     margin-bottom: 50px;
 }
 
+.table {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.show-entry-buttons {
+    text-align: center;
+    margin: 30px auto;
+}
+
 .col-sm {
     margin-bottom: 3em;
 }

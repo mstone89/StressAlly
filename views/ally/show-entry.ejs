@@ -16,51 +16,75 @@
             </div>
         </div>
         <div class="container entry-content">
-            <dl>
-                <dt>Date:</dt>
-                <dd><%=entry.date%></dd>
-                <dt>Rating:</dt>
-                <dd><%=entry.rating%></dd>
-                <dt>Foods:</dt>
-                <dd>
-                    <% if (entry.food.length <= 0 || entry.food[0] === '') { %>
-                        None
-                    <% } else { %>
-                        <%=entry.food%>
-                    <% } %>
-                </dd>
-                <dt>Sleep:</dt>
-                <dd><%=entry.sleep%></dd>
-                <dt>Meditated?</dt>
-                <dd>
-                    <% if (entry.meditate === true) { %>
-                        Yes
-                    <% } else { %>
-                        No
-                    <% } %>
-                </dd>
-                <dt>Exercised?</dt>
-                <dd>
-                    <% if (entry.exercise === true) { %>
-                        Yes
-                    <% } else { %>
-                        No
-                    <% } %>
-                </dd>
-                <dt>Comments</dt>
-                <dd>
-                    <% if (entry.comments === null || entry.comments === '') { %>
-                        None
-                    <% } else { %>
-                        <%=entry.comments%>
-                    <% } %>
-                </dd>
-            </dl>
-            <a href="/ally/<%=entry.id%>/edit"><button class="btn btn-info">Edit Entry</button></a>
-            <form class="delete" action="/ally/<%=entry.id%>?_method=DELETE" method="POST">
-                <input class="btn btn-outline-danger" type="submit" value="Delete Entry"/>
-            </form>
-            <a href="/ally/entries"><button class="btn btn-outline-info return-to-entries">Return To Entries</button></a>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Variables</th>
+                        <th scope="col col-right">Your Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Date</th>
+                        <td><%=entry.date%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Anxiety Rating</th>
+                        <td><%=entry.rating%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Food Eaten</th>
+                        <td>
+                            <% if (entry.food.length <= 0 || entry.food[0] === '') { %>
+                                None
+                            <% } else { %>
+                                <%=entry.food%>
+                            <% } %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Hours of Sleep</th>
+                        <td><%=entry.sleep%></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Meditated?</th>
+                        <td>
+                            <% if (entry.meditate === true) { %>
+                                Yes
+                            <% } else { %>
+                                No
+                            <% } %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Exercised?</th>
+                        <td>
+                            <% if (entry.exercise === true) { %>
+                                Yes
+                            <% } else { %>
+                                No
+                            <% } %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Comments</th>
+                        <td>
+                            <% if (entry.comments === null || entry.comments === '') { %>
+                                None
+                            <% } else { %>
+                                <%=entry.comments%>
+                            <% } %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container show-entry-buttons">
+                <a href="/ally/<%=entry.id%>/edit"><button class="btn btn-info">Edit Entry</button></a>
+                <form class="delete" action="/ally/<%=entry.id%>?_method=DELETE" method="POST">
+                    <input class="btn btn-outline-danger" type="submit" value="Delete Entry"/>
+                </form>
+                <a href="/ally/entries"><button class="btn btn-outline-info return-to-entries">Return To Entries</button></a>
+            </div>
         </div>
     </body>
 </html>
