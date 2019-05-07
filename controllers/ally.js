@@ -213,7 +213,8 @@ ally.get('/', (req, res) => {
             }
             res.render('ally/index.ejs', {
                 goals: foundUser.goals,
-                activities: foundUser.activities
+                activities: foundUser.activities,
+                currentUser: foundUser
             });
         });
     } else {
