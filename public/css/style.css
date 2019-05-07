@@ -11,7 +11,7 @@ body {
 }
 
 .top {
-    height: 500px;
+    height: 600px;
     overflow: hidden;
     position: relative;
     padding: 0;
@@ -38,7 +38,6 @@ img {
     position: relative;
     padding-left: 4em;
 }
-
 .get-started {
     margin: 3em 0;
     padding: 1em 3em;
