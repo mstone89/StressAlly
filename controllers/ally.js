@@ -13,7 +13,7 @@ SEED ACTIVITIES
 ****************/
 
 // Cited in RESOURCES.md, line 1
-Activity.find({}, (error, data) => {
+Activity.find().exec((error, data) => {
     let count = data.length;
     if (count === 0) {
         Activity.create(seedActivities);
