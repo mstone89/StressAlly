@@ -110,6 +110,10 @@ img {
     width: 18em;
 }
 
+.new-goal-button {
+    margin-left: 20px;
+}
+
 .delete {
     display: inline;
     margin-left: 20px;
