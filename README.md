@@ -5,6 +5,8 @@
 
 StressAlly is a self-help app designed for those with anxiety. It's a tool to track daily anxiety and stress, set goals for overcoming anxious situations, and set activities and exercises to relieve anxiety and keep it at bay.
 
+#### The App
+
 [StressAlly](https://stress-ally.herokuapp.com/)
 
 ## Technologies Used
