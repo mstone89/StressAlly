@@ -12,11 +12,11 @@ const seedActivities = require('../models/activitiesSeed.js');
 SEED ACTIVITIES
 ****************/
 
-// https://stackoverflow.com/questions/35443821/find-and-count-elements-of-collection-with-mongoose
-Activity.find().exec((error, data) => {
+// Cited in RESOURCES.md, line 1
+Activity.find({}, (error, data) => {
     let count = data.length;
     if (count === 0) {
-        Activity.create(seedActivities, (error, createdActivities) => {});
+        Activity.create(seedActivities);
     }
     console.log(count);
 });
