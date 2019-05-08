@@ -16,7 +16,7 @@ SEED ACTIVITIES
 Activity.find().exec((error, data) => {
     let count = data.length;
     if (count === 0) {
-        Activity.create(seedActivities);
+        Activity.create(seedActivities, (error, allActivities) => {});
     }
     console.log(count);
 });
