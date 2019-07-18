@@ -14,6 +14,7 @@ StressAlly adheres to the MVC file structure, and employs the 7 RESTful routes a
 It is built with:
 
 - Node.js
+- MongoDB
 - Mongoose
 - Express
 - EJS
